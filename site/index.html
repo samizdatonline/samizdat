@@ -3,14 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/icons.css">
-    <link type="text/css" rel="stylesheet" href="/styles/component.css">
     <link rel="icon" href="favicon.ico">
-    <title>Metric</title>
-    <script src="/lib/moment"></script>
-    <script type="module" lang="javascript" src="index.mjs"></script>
+    <title>World News</title>
+    <script type="module">
+        import Main from '/scripts/Main.mjs';
+        let main = new Main();
+        await main.render(document.body);
+    </script>
 </head>
 <body>
+    <div id="body-container"></div>
 </body>
 </html>
