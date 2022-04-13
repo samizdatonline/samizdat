@@ -1,0 +1,17 @@
+[Unit]
+Description=Samizdat
+
+[Service]
+WorkingDirectory=/opt/samizdat/
+ExecStart=/usr/bin/npm start &
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=
+Environment=PORT=3000
+
+User=ubuntu
+Group=ubuntu
+
+[Install]
+WantedBy=multi-user.target
