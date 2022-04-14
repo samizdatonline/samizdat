@@ -32,6 +32,13 @@ be hosted.
 > it causes the site urls to include the port. In /etc/hosts you can then point the
 > site urls to localhost to run in a dev environment.
 
+### Considerations
+
+While this project is all about masking DNS from censors,
+it should not mask its purpose to the open internet. For example, it should
+present a clear user-agent to the sites that routed. This will help us
+gain the cooperation of news outlets that might otherwise view it as theft.
+
 ## Systems Config
 The server listens on port 3000, http requests for all incoming domains are
 routed to localhost:3000.

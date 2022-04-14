@@ -110,9 +110,9 @@ export default class Resource {
      * @param root
      * @returns {Promise<string>}
      */
-    async deliverHtml(target) {
-        let html = await axios.get(target.url);
-        let $ = cheerio.load(html.data);
+    async deliverHtml(target,res) {
+        let response = await axios.get(target.url);
+        let $ = cheerio.load(response.data);
         for (let tag of [
             {query:"a",attrib:"href",type:"text/html"},
             {query:"link",attrib:"href",type:"text/plain"},
@@ -126,9 +126,11 @@ export default class Resource {
                 }
             }
         }
-        return $.root().html();
+        res.send($.root().html());
     }
-    async deliverOther(target) {
-        return await axios.get(target.url);
+    async deliverOther(target,res) {
+        let response = await axios.get(target.url);
+        res.set("Content-Type",response.headers['content-type']);
+        res.send(response.data);
     }
 }

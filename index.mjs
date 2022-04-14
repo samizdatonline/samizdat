@@ -23,16 +23,23 @@ let main = async function() {
     app.get('/go/:token',async (req,res)=>{
         try {
             let target = await resource.parse(req.params.token);
-            if (target.type==='text/html') {
-                let html = await resource.deliverHtml(target);
-                res.send(html);
-            } else {
-                let data = await resource.deliverOther(target)
-                res.send(data);
-            }
+            if (target.type==='text/html') await resource.deliverHtml(target,res);
+            else await resource.deliverOther(target,res)
         } catch(e) {
             console.log(e);
             res.status(500).send(e.message);
+        }
+    })
+    app.get('/mask/*',async (req,res)=>{
+        let url = req.url.slice(6);
+        let root = url.match(/^[^:/?#]+:\/\/[^/?#]*/);
+        if (!root || !root[0]) {
+            res.send('<!DOCTYPE html><html><body>malformed url. please provide the full protocol, host and path</body></html>');
+        } else {
+            let token = resource.tokenize(url,root[0],"text/html");
+            let path = `${resource.randomDomain}/go/${token}`;
+            let html=`<!DOCTYPE html><html><body><a href='http://${path}'>http://${path}</a></a></body></html>`;
+            res.send(html);
         }
     })
     app.get('/id',(req,res)=>{
