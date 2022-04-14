@@ -10,10 +10,13 @@ import * as cheerio from "cheerio";
 export default class Resource {
     constructor() {
         this.domains = [
-            "od3pz6rg.link:3000",
-            "jxvj963s.link:3000",
-            "6tmk927m.link:3000"
+            "od3pz6rg.link",
+            "jxvj963s.link",
+            "6tmk927m.link"
         ];
+        if (process.env.PROFILE === "DEV") {
+            this.domains = this.domains.map(d=>d+":"+(process.env.PORT||"3000"));
+        }
         this.sites = [
             {"name": "New York Times","url": "https://www.nytimes.com","root": "https://www.nytimes.com"},
             {"name": "The Guardian","url": "https://www.theguardian.com","root": "https://www.theguardian.com"},

@@ -1,8 +1,0 @@
-{
-  "sites": [
-    {"name": "New York Times","url": "https://www.nytimes.com"},
-    {"name": "Associated Press - World News","url": "https://apnews.com/hub/world-news"},
-    {"name": "Al Jazeera","url": "https://www.aljazeera.com/"}
-  ],
-  "feeds": []
-}
