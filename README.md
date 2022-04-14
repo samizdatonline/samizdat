@@ -24,6 +24,14 @@ and then pushes it back to the browser after again rewriting all the links.
 * */site* - public files served from /. This includes index.html, css, etc.
 * *index.mjs* - the server root 
 
+The resource module hard codes data on domains and sites. This should instead
+be provided by the root server where tools for administering the network should
+be hosted.
+
+> NOTE: The only environment variables are PROFILE and PORT. If PROFILE is set to DEV,
+> it causes the site urls to include the port. In /etc/hosts you can then point the
+> site urls to localhost to run in a dev environment.
+
 ## Systems Config
 The server listens on port 3000, http requests for all incoming domains are
 routed to localhost:3000.
