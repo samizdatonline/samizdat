@@ -1,6 +1,34 @@
 # samizdat
 
+This project is intended to break through the DNS barriers commonly used
+to censure information in countries that prefer propaganda over true reporting.
+It provides a relay to respected global news outlets, masking the dns and ip
+behind a large randomized pool of addresses.
+
+It is not perfect. It could also be construed as illegal content scraping or
+ad blocking. We hope to ensure that the original site is delivered as close
+to the original, and will only render content in locations where that content
+is unreachable.
+
+## System Architecture
+The project is built on ESM node/express. It uses a relatively minimal set of 
+npm plugins and no cookies.
+
+It works by rewriting html links with JWT encoded strings containing the original
+resource locators. The server decodes the request, fetches the original content
+and then pushes it back to the browser after again rewriting all the links.
+
+### Code Structure
+* */components* - server functionality. Resource.mjs hosts the bulk of the site rendering
+* */config* - systemd and nginx config files
+* */site* - public files served from /. This includes index.html, css, etc.
+* *index.mjs* - the server root 
+
 ## Systems Config
+The server listens on port 3000, http requests for all incoming domains are
+routed to localhost:3000.
+
+This is the pertinent config history for setting up a vanilla ubuntu AWS instance
 
 ```shell
     6  sudo apt update
