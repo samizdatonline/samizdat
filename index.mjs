@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import Resource from './components/Resource.mjs'
 
 let main = async function() {
-    const app = express();
+    let app = express();
     // attach logger
     app.use(morgan('dev'));
     // parse body and query string from request object
@@ -13,11 +13,20 @@ let main = async function() {
     app.use(express.json())
     app.get('/health',function(req,res){res.status(200).send()});
     app.get('/sites',async (req,res)=>{
-        res.json(await Resource.sites());
+        let sites = await Resource.sites()
+        res.json(sites);
     });
+    app.get('/retry',(req,res)=>{
+        res.send('page link cannot be found. Please reload the page and try again.')
+    })
+    app.get('/go/:token',async (req,res)=>{
+        let target = await Resource.parse(req.params.token);
+        let html = await Resource.deliver(target.url);
+        res.send(html);
+    })
     app.use('/',express.static(path.resolve('site')));
 
-    const server = http.createServer(app);
+    let server = http.createServer(app);
     server.listen(process.env.PORT || 3000);
     server.on('error', console.log);
     server.on('listening',()=>console.log("Listening on port "+server.address().port));

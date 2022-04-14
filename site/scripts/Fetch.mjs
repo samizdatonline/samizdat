@@ -18,6 +18,9 @@ export default class Fetch {
     static async getText(path,options) {
         return await this.get(path,options,'text');
     }
+    static async getText(path,options) {
+        return await this.get(path,options,'text');
+    }
     static async put(path,body) {
         if (path.charAt(0) !== '/') path = '/'+path;
         let options = {method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)};
