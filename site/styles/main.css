@@ -24,38 +24,14 @@
     --status-warning:#DDDD7780;
     --status-error:#DD777780;
 }
-
-button {
-    border:2px solid var(--page-border);
-    background-color:var(--tray-bg);
-    border-radius:8px;
-    padding:2px 6px;
-    cursor:pointer;
-    color:var(--text-color);
-    white-space: nowrap;
-}
-button:hover {
-    background-color:var(--page-action);
-}
-
-.k-grid td.k-state-selected, .k-grid tr.k-state-selected > td, .k-drawer-item.k-state-selected {
-    background-color:var(--page-action);
-    color:black;
-}
-.k-drawer-item.k-state-selected:hover {
-    background-color:var(--page-action);
-    color:black;
-}
-
-BODY {
-    overflow:hidden;
-}
-
 #body-container {
     margin:0;
     padding:var(--spacer);
 }
-
+.link-tray {
+    display: flex;
+    flex-wrap: wrap;
+}
 .site-link {
     border:1px solid black;
     margin:var(--spacer);

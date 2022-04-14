@@ -9,13 +9,16 @@ export default class {
         let sites = await Fetch.get('/sites');
         this.sitesDiv = document.createElement('div');
         this.sitesDiv.innerHTML = "<h1>World News</h1>";
+        let tray = document.createElement('div');
+        tray.classList.add('link-tray');
         for (let site of sites) {
             let sitelink = document.createElement('a');
             sitelink.classList.add('site-link')
-            sitelink.href = '/go/'+site.id;
+            sitelink.href = site.server+'/go/'+site.id;
             sitelink.innerHTML = site.name
-            this.sitesDiv.append(sitelink);
+            tray.append(sitelink);
         }
+        this.sitesDiv.append(tray);
         document.body.append(this.sitesDiv);
 
         // add a twitter-like element. ...hmmm
