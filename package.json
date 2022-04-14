@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config index.js"
   },
   "repository": {
     "type": "git",
