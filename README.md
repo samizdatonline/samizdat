@@ -20,7 +20,11 @@ Please see https://github.com/mespr/samizdat/issues.
 Try http://raul.help. Russia, Are You Listening. Try http://rhonda.help/mask/https://nytimes.com.
 
 The domains change. That is the point. The more domains assigned to the project
-the stronger the project becomes.
+the stronger the project becomes. Try also http://help.me.rhonda.help/ or http://6tmk927m.link/
+
+Please run a server and register more domains. The code in /components/Resource.mjs
+identifies all available domains. This should be updated to retrieve sites and
+ip assignments by a shared and unaffiliated server, but right now it's in the code.
 
 ## System Architecture
 The project is built on ESM node/express. It uses a relatively minimal set of 
