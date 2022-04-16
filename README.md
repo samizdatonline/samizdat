@@ -13,6 +13,8 @@ in locations where that content is unreachable.
 This is a not-for-profit effort, licensed to the public with no expectations
 or restrictions. Just hope.
 
+Please see https://github.com/mespr/samizdat/issues.
+
 ## Usage
 
 Try http://raul.help. Russia, Are You Listening. Try http://rhonda.help/mask/https://nytimes.com.
