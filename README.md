@@ -48,7 +48,7 @@ be hosted.
 
 While this project is all about masking DNS from censors,
 it should not mask its purpose to the open internet. For example, it should
-present a clear user-agent to the sites that routed. This will help us
+present a clear user-agent to the sites that are routed. This will help us
 gain the cooperation of news outlets that might otherwise view it as theft.
 
 ## Systems Config
