@@ -9,38 +9,20 @@ import * as cheerio from "cheerio";
 
 export default class Resource {
     constructor() {
-        this.domains = [
-            "od3pz6rg.link",
-            "jxvj963s.link",
-            "6tmk927m.link"
-        ];
+        this.domains = [];
         if (process.env.PROFILE === "DEV") {
-            this.domains = this.domains.map(d=>d+":"+(process.env.PORT||"3000"));
+            this.domains = [
+                "9vcboht8.link:3000",
+                "dfungwjv.link:3000",
+                "q3qgoe2h.link:3000"
+            ];
         }
-        this.sites = [
-            {"name": "New York Times","url": "https://www.nytimes.com","root": "https://www.nytimes.com"},
-            {"name": "The Guardian","url": "https://www.theguardian.com","root": "https://www.theguardian.com"},
-            {"name": "Associated Press - World News","url": "https://apnews.com/hub/world-news","root": "https://apnews.com"},
-            {"name": "Al Jazeera","url": "https://www.aljazeera.com/","root": "https://www.aljazeera.com"},
-            {"name": "NY Times (Chinese)","url": "https://cn.nytimes.com","root": "https://cn.nytimes.com"},
-            {"name": "Hong Kong Free Press","url": "https://hongkongfp.com/","root": "https://hongkongfp.com"}
-        ];
+        this.sites = [];
         this.signers = [
             "yr6lptp5xp6d3zv8oumcocbj9sq2n4",
             "y04skj28v0v2b5mwtjdzn6bjltcsvj",
             "p6x9056ssk3cq1z2i61n5vnmvccvdx"
         ];
-    }
-
-    /**
-     * Mint is an asynchronous "new". It creates and instance an populates
-     * the configuration data from the server
-     * @returns {Promise<Resource>}
-     */
-    static async mint() {
-        let resource = new Resource();
-        await resource.update();
-        return resource;
     }
 
     /**
@@ -50,11 +32,21 @@ export default class Resource {
      * @returns {Promise<void>}
      */
     async update() {
-        // update sites and domains from server at some interval
-        // then tokenize the sites
-        for (let site of this.sites) {
-            site.id = this.tokenize(site.url,site.root,"text/html");
-            site.server = "http://"+this.randomDomain
+        try {
+            // update sites and domains from server
+            let root = process.env.MASTER || "http://localhost:"+(process.env.PORT||3000);
+            axios.get(root+'/admin/domains').then(res=>{
+                this.domains = res.data;
+            });
+            axios.get(root+'/admin/sites').then(res=>{
+                this.sites = res.data.map(site=>{
+                    site.id = this.tokenize(site.url,site.root,"text/html");
+                    site.server = "http://"+this.randomDomain;
+                    return site;
+                })
+            });
+        } catch(e) {
+            console.log("update is failing: "+e.message);
         }
     }
 
@@ -116,6 +108,7 @@ export default class Resource {
         for (let tag of [
             {query:"a",attrib:"href",type:"text/html"},
             {query:"link",attrib:"href",type:"text/plain"},
+            {query:"script",attrib:"src",type:"application/javascript"},
             {query:"img",attrib:"src"}
         ]) {
             let elements = $(tag.query)

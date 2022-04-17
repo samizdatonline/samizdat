@@ -1,7 +1,7 @@
 {
   "name": "samizdat",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is intended to break through the DNS barriers commonly used to censor information in countries that prefer propaganda over true reporting. It provides a relay to respected global news outlets, masking the dns and ip behind a large randomized pool of addresses.",
   "main": "index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,5 +27,6 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "post-feed-reader": "^1.2.0"
-  }
+  },
+  "devDependencies": {}
 }

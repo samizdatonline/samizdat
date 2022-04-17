@@ -4,9 +4,10 @@ import path from 'path'
 import morgan from 'morgan';
 import Resource from './components/Resource.mjs';
 import IdForge from './components/IdForge.mjs';
+import Admin from './components/Admin.mjs';
 
 let main = async function() {
-    let resource = await Resource.mint();
+    let resource = new Resource();
     let app = express();
     // attach logger
     app.use(morgan('dev'));
@@ -45,12 +46,19 @@ let main = async function() {
     app.get('/id',(req,res)=>{
         res.send(IdForge.randomId(req.query.length||8));
     })
+    app.use('/admin',(new Admin()).routes());
     app.use('/',express.static(path.resolve('site')));
 
     let server = http.createServer(app);
     server.listen(process.env.PORT || 3000);
     server.on('error', console.log);
     server.on('listening',()=>console.log("Listening on port "+server.address().port));
+
+    // populate routing data
+    await resource.update();
+    setInterval(async ()=>{
+        await resource.update();
+    },10000);
 }();
 
 process.on('SIGINT', function() {

@@ -1,0 +1,9 @@
+[
+  {"name": "New York Times","url": "https://www.nytimes.com","root": "https://www.nytimes.com"},
+  {"name": "The Guardian","url": "https://www.theguardian.com","root": "https://www.theguardian.com"},
+  {"name": "Associated Press - World News","url": "https://apnews.com/hub/world-news","root": "https://apnews.com"},
+  {"name": "Al Jazeera","url": "https://www.aljazeera.com/","root": "https://www.aljazeera.com"},
+  {"name": "NY Times (Chinese)","url": "https://cn.nytimes.com","root": "https://cn.nytimes.com"},
+  {"name": "Hong Kong Free Press","url": "https://hongkongfp.com/","root": "https://hongkongfp.com"},
+  {"name": "Taiwan News Today","url": "https://www.taiwannews.com.tw/","root": "https://www.taiwannews.com.tw/"}
+]
