@@ -62,7 +62,7 @@ admin server. These names can be routed to localhost in `/etc/hosts`
 127.0.0.1       dfungwjv.link
 127.0.0.1       q3qgoe2h.link
 ```
-
+>NOTE: the dev domain names are hardcoded to use port 3000 currently.
 ### Considerations
 
 While this project is all about masking DNS from censors,
