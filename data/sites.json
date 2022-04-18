@@ -1,5 +1,5 @@
 [
-  {"name": "New York Times","url": "https://www.nytimes.com","root": "https://www.nytimes.com"},
+  {"name": "New York Times","url": "https://www.nytimes.com/section/world","root": "https://www.nytimes.com"},
   {"name": "The Guardian","url": "https://www.theguardian.com","root": "https://www.theguardian.com"},
   {"name": "Associated Press - World News","url": "https://apnews.com/hub/world-news","root": "https://apnews.com"},
   {"name": "Al Jazeera","url": "https://www.aljazeera.com/","root": "https://www.aljazeera.com"},
