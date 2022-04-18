@@ -24,6 +24,9 @@
     --status-warning:#DDDD7780;
     --status-error:#DD777780;
 }
+#introduction {
+    font-style: italic;
+}
 #body-container {
     margin:0;
     padding:var(--spacer);
