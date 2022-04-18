@@ -5,12 +5,20 @@ import morgan from 'morgan';
 import Resource from './components/Resource.mjs';
 import IdForge from './components/IdForge.mjs';
 import Admin from './components/Admin.mjs';
+import cors from 'cors'
 
 let main = async function() {
     let resource = new Resource();
     let app = express();
     // attach logger
     app.use(morgan('dev'));
+    // open cors
+    app.use(cors({
+        origin: function(origin, callback){
+            return callback(null, true);
+        },
+        credentials:true
+    }));
     // parse body and query string from request object
     app.use(express.urlencoded({extended: true}));
     app.use(express.json())

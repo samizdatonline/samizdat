@@ -37,16 +37,33 @@ and then pushes it back to the browser after again rewriting all the links.
 ### Code Structure
 * */components* - server functionality. Resource.mjs hosts the bulk of the site rendering
 * */config* - systemd and nginx config files
+* */data* - JSON data
 * */site* - public files served from /. This includes index.html, css, etc.
 * *index.mjs* - the server root 
 
-The resource module hard codes data on domains and sites. This should instead
-be provided by the root server where tools for administering the network should
-be hosted.
+The Admin module serves up the configuration data in /data. It is meant
+to be enabled as a root server that others can regularly pull from. This
+should probably be moved to a separate package as it grows.
 
-> NOTE: The only environment variables are PROFILE and PORT. If PROFILE is set to DEV,
-> it causes the site urls to include the port. In /etc/hosts you can then point the
-> site urls to localhost to run in a dev environment.
+#### Environment Variables
+All optional
+
+| Name    | Default                 | Description                                                    |
+|---------|-------------------------|----------------------------------------------------------------|
+| MASTER  | http://localhost:{PORT} | Path to the administration server                              |
+| PORT    | 3000                    | Port to listen on                                              |
+| PROFILE |                         | If set to DEV, instructs the system to run in development mode |
+
+#### Development Mode
+In development mode, the active domains are hardcoded rather fetched from the
+admin server. These names can be routed to localhost in `/etc/hosts`
+```json
+[
+"9vcboht8.link:3000",
+"dfungwjv.link:3000",
+"q3qgoe2h.link:3000"
+]
+```
 
 ### Considerations
 
