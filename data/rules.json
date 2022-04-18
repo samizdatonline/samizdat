@@ -2,6 +2,9 @@
   "html": [
     {"match": "^https://www.nytimes.com","rule":{
       "name": "SKIPTAG","value": "script"
+    }},
+    {"match": "^https://cn.nytimes.com","rule":{
+      "name": "SKIPTAG","value": "script"
     }}
   ]
 }
