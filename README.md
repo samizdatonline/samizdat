@@ -23,9 +23,12 @@ The domains change. That is the point. The more domains assigned to the project
 the stronger the project becomes. Try also http://help.me.rhonda.help/ or http://6tmk927m.link/
 When html is requested, every link, anchor, img and script is swapped with a masked url.
 
-Please run a server and register more domains. The code in /components/Resource.mjs
-identifies all available domains. This should be updated to retrieve sites and
-ip assignments by a shared and unaffiliated server, but right now it's in the code.
+Please run a server and register more domains. /data/domains.json identifies
+all the domains available to use. This is served from /components/Admin.js
+which is indented to manage this list.
+
+>NOTE: the mask feature may need to suppressed or require authentication to avoid
+> abuse of this system.
 
 ## System Architecture
 The project is built on ESM node/express. It uses a relatively minimal set of 
