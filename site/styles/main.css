@@ -25,6 +25,9 @@
     --status-error:#DD777780;
 }
 #introduction {
+    border:1px solid darkgray;
+    background-color: lightgray;
+    padding:var(--spacer);
     font-style: italic;
 }
 #body-container {
