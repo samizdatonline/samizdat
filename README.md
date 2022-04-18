@@ -70,9 +70,21 @@ admin server. These names can be routed to localhost in `/etc/hosts`
 ### Considerations
 
 While this project is all about masking DNS from censors,
-it should not mask its purpose to the open internet. For example, it should
-present a clear user-agent to the sites that are routed. This will help us
-gain the cooperation of news outlets that might otherwise view it as theft.
+it should not mask its purpose to the open internet. The user-agent
+header is marked with the application name and the address of this
+repository. Ideally, this should include a signature granted
+by the organization so honest participating servers can be 
+distinguished from servers that may have a different reason to
+mask dns. This will help us gain the cooperation of news outlets 
+that might otherwise view it as theft.
+
+It could even be used to pay back news outlets with donations as ads
+delivered to samizdat servers will be useless.
+
+The service must also try to route to the original site if the site
+is in fact available to the requester. This needs to be suppressed
+when in development mode, but an indicator as such is added to the
+user-agent as well.
 
 ## Systems Config
 The server listens on port 3000, http requests for all incoming domains are

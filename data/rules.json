@@ -1,0 +1,7 @@
+{
+  "html": [
+    {"match": "^https://www.nytimes.com","rule":{
+      "name": "SKIPTAG","value": "script"
+    }}
+  ]
+}

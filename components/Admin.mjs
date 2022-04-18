@@ -25,6 +25,15 @@ export default class Admin {
                 res.status(500).send(`Error invoking ${req.method} on data: ${e.message}`);
             }
         });
+        router.get("/rules",async(req,res)=>{
+            try {
+                let result = fs.readFileSync(path.resolve('data/rules.json')).toString();
+                res.json(JSON.parse(result));
+            } catch(e) {
+                console.error(`Error invoking ${req.method} on data`,e);
+                res.status(500).send(`Error invoking ${req.method} on data: ${e.message}`);
+            }
+        });
         router.get('/',async(req,res)=>{
             res.send("hello admin");
         })

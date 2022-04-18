@@ -55,3 +55,6 @@ public/js/blackfire.js
 package-lock\.json
 
 \.package\.json\.swp
+
+# analysis samples
+samples
