@@ -17,10 +17,11 @@ Please see https://github.com/mespr/samizdat/issues.
 
 ## Usage
 
-Try http://raul.help. Russia, Are You Listening. Try http://rhonda.help/mask/https://nytimes.com.
+Try http://raul.help. Russia, Are You Listening. Try http://rhonda.help/mask/https://www.theguardian.com.
 
 The domains change. That is the point. The more domains assigned to the project
 the stronger the project becomes. Try also http://help.me.rhonda.help/ or http://6tmk927m.link/
+When html is requested, every link, anchor, img and script is swapped with a masked url.
 
 Please run a server and register more domains. The code in /components/Resource.mjs
 identifies all available domains. This should be updated to retrieve sites and
