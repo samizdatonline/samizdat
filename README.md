@@ -57,12 +57,10 @@ All optional
 #### Development Mode
 In development mode, the active domains are hardcoded rather fetched from the
 admin server. These names can be routed to localhost in `/etc/hosts`
-```json
-[
-"9vcboht8.link:3000",
-"dfungwjv.link:3000",
-"q3qgoe2h.link:3000"
-]
+```shell
+127.0.0.1       9vcboht8.link
+127.0.0.1       dfungwjv.link
+127.0.0.1       q3qgoe2h.link
 ```
 
 ### Considerations
