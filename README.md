@@ -39,7 +39,7 @@ When html is requested, every link, anchor, img and script is swapped with a mas
 
 Please run a server and register more domains. /data/domains.json identifies
 all the domains available to use. This is served from /components/Admin.js
-which is indented to manage this list.
+which is indended to manage this list.
 
 >NOTE: the mask feature may need to suppressed or require authentication to avoid
 > abuse of this system.
