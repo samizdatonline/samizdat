@@ -23,7 +23,11 @@ ideas from http://raul.help/id or http://raul.help/id?length=20). If you have
 some idle computer power, install the app and let us know its IP address.
 
 If you happen to be part of the W3C, please make this project unnecessary.
-DNS should not be abused for political gain.
+DNS should not be abused for political gain. The open Internet is focused on
+ensuring the integrity and validation of domain names, so we can trust the
+source, whatever the source is; but that mechanism is being used to hide the
+Internet and hide free press. The world wants both integrity and access.
+
 
 ## Usage
 
