@@ -15,6 +15,16 @@ or restrictions. Just hope.
 
 Please see https://github.com/mespr/samizdat/issues.
 
+## How to Participate
+If you are a developer, please help embellish and troubleshoot. If you are a
+publisher, please contact us. If you are a lawyer, help us navigate the guardrails
+of internation IP law. If you simply care, register random domains (get name
+ideas from http://raul.help/id or http://raul.help/id?length=20). If you have
+some idle computer power, install the app and let us know its IP address.
+
+If you happen to be part of the W3C, please make this project unnecessary.
+DNS should not be abused for political gain.
+
 ## Usage
 
 Try http://raul.help. Russia, Are You Listening. Try http://rhonda.help/mask/https://www.theguardian.com.
