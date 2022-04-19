@@ -41,7 +41,7 @@ Please run a server and register more domains. /data/domains.json identifies
 all the domains available to use. This is served from /components/Admin.js
 which is indended to manage this list.
 
->NOTE: the mask feature may need to suppressed or require authentication to avoid
+>NOTE: the mask feature may need to be suppressed or require authentication to avoid
 > abuse of this system.
 
 ## System Architecture
