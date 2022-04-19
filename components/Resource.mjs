@@ -145,6 +145,11 @@ export default class Resource {
     async deliverOther(target,res) {
         let response = await axios.get(target.url,{'User-Agent':this.userAgent});
         res.set("Content-Type",response.headers['content-type']);
-        res.send(response.data);
+        try {
+            res.send(response.data);
+        } catch(e) {
+            res.set("Content-Type","text/html");
+            res.send("something went wrong: "+e.message);
+        }
     }
 }
