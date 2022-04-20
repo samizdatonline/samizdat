@@ -18,7 +18,7 @@ Please see https://github.com/mespr/samizdat/issues.
 ## How to Participate
 If you are a developer, please help embellish and troubleshoot. If you are a
 publisher, please contact us. If you are a lawyer, help us navigate the guardrails
-of internation IP law. If you simply care, register random domains (get name
+of international IP law. If you simply care, register random domains (get name
 ideas from http://raul.help/id or http://raul.help/id?length=20). If you have
 some idle computer power, install the app and let us know its IP address.
 
@@ -39,9 +39,9 @@ When html is requested, every link, anchor, img and script is swapped with a mas
 
 Please run a server and register more domains. /data/domains.json identifies
 all the domains available to use. This is served from /components/Admin.js
-which is indented to manage this list.
+which is indended to manage this list.
 
->NOTE: the mask feature may need to suppressed or require authentication to avoid
+>NOTE: the mask feature may need to be suppressed or require authentication to avoid
 > abuse of this system.
 
 ## System Architecture
