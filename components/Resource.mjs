@@ -143,7 +143,7 @@ export default class Resource {
         res.send($.root().html());
     }
     async deliverOther(target,res) {
-        let response = await axios.get(target.url,{'User-Agent':this.userAgent});
+        let response = await axios.get( target.url, { 'User-Agent': this.userAgent, responseType: 'stream' });
         res.set("Content-Type",response.headers['content-type']);
         try {
             res.send(response.data);
