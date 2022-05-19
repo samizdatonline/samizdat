@@ -146,7 +146,7 @@ export default class Resource {
         let response = await axios.get( target.url, { 'User-Agent': this.userAgent, responseType: 'stream' });
         res.set("Content-Type",response.headers['content-type']);
         try {
-            res.send(response.data);
+            response.data.pipe(res);
         } catch(e) {
             res.set("Content-Type","text/html");
             res.send("something went wrong: "+e.message);
