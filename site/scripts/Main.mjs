@@ -8,7 +8,6 @@ export default class {
         // add links to global news sites that will be washed of domain recognition
         let sites = await Fetch.get('/sites');
         this.sitesDiv = document.createElement('div');
-        this.sitesDiv.innerHTML = "<h1>World News</h1>";
         let tray = document.createElement('div');
         tray.classList.add('link-tray');
         for (let site of sites) {
@@ -19,11 +18,11 @@ export default class {
             tray.append(sitelink);
         }
         this.sitesDiv.append(tray);
-        document.body.append(this.sitesDiv);
+        let bodyContainer = document.querySelector("#body-container");
+        bodyContainer.append(this.sitesDiv);
 
         // add a twitter-like element. ...hmmm
         this.messageDiv = document.createElement('div');
-        this.messageDiv.innerHTML = "<h1>Messages</h1>";
         document.body.append(this.messageDiv);
     }
 }
