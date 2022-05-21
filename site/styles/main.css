@@ -17,10 +17,24 @@ body {
 }
 
 #introduction {
-    background-color: #909090;
+    background-color: #27272a;
     padding:var(--spacer2);
-    font-style: italic;
+    color:#ebece4;
 }
+#introduction A {
+    color:#ebece4;
+    font-weight:bold;
+}
+#introduction A:hover {
+    font-decoration:underline;
+}
+#introduction H1 {
+    color:#3450f4;
+    font-size:1.6em;
+    letter-spacing: 3px;
+    font-weight: normal;
+}
+
 #body-container {
     margin:0;
     padding:var(--spacer2);
@@ -33,9 +47,9 @@ body {
     border-radius:var(--spacer2);
     margin:var(--spacer);
     padding:var(--spacer);
-    background-color:#0f165a;
+    background-color:#ffffff;
     cursor:pointer;
-    color:#ebece4;
+    color:#2d4fff;
     font-size:1.2em;
 }
 .site-link:hover {
