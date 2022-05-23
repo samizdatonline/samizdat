@@ -39,8 +39,8 @@ let main = async function() {
             res.status(500).send(e.message);
         }
     })
-    app.get('/mask/*',async (req,res)=>{
-        let url = req.url.slice(6);
+    app.get(/^\/?(mask|share)\/(.*)/,async (req,res)=>{
+        let url = req.params[1];
         let root = url.match(/^[^:/?#]+:\/\/[^/?#]*/);
         if (!root || !root[0]) {
             res.send('<!DOCTYPE html><html><body>malformed url. please provide the full protocol, host and path</body></html>');
