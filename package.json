@@ -28,6 +28,7 @@
     "html-pdf-node": "^1.0.8",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "post-feed-reader": "^1.2.0"
+    "post-feed-reader": "^1.2.0",
+    "puppeteer": "^14.1.2"
   }
 }
