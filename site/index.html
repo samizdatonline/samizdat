@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/main.css">
-    <link rel="stylesheet" href="/styles/icons.css">
-    <link rel="icon" href="favicon.ico">
-    <title>Samizdat Online</title>
-    <script type="module">
-        import Main from '/scripts/Main.mjs';
-        let main = new Main();
-        await main.render(document.body);
-    </script>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1.0'>
+  <link rel='stylesheet' href='/styles/main.css'>
+  <link rel='stylesheet' href='/styles/icons.css'>
+  <link rel='icon' href='favicon.ico'>
+  <title>Samizdat Online</title>
+  <script type='module'>
+    import Main from '/scripts/Main.mjs';
+
+    let main = new Main();
+    await main.render(document.body);
+  </script>
 </head>
 <body>
-    <div id="introduction">
-        <h1>Samizdat Online (coming soon)</h1>
-        <p>This site is a work in progress. It aims to bring global news outlets to
-            everyone, despite national boundaries and autocratic controls. Its purpose
-            is to break through the DNS blacklisting. We don't profess to
-            know the truth. We do know that a free press helps uncover it.
-        </p>
-        <p>Please see the source code and details at
-            <a href="https://github.com/samizdatonline">github.com/samizdatonline</a>.
-            Get involved if you can.
-        </p>
-        <p>
-            Try some of the links below. The sites are true to the live original, as much as possible.
-            It's improving and becoming more effective.
-            Notice all the links are randomized to mask the origin.
-        </p>
-    </div>
-    <div id="body-container"></div>
+<div id='introduction'>
+  <h1>Samizdat Online (coming soon)</h1>
+  <p>This site is a work in progress. It aims to bring global news outlets to
+    everyone, despite national boundaries and autocratic controls. Its purpose
+    is to break through the DNS blacklisting. We don't profess to
+    know the truth. We do know that a free press helps uncover it.
+  </p>
+  <p>Please see the source code and details at
+    <a href='https://github.com/samizdatonline'>github.com/samizdatonline</a>.
+    Get involved if you can.
+  </p>
+  <p>
+    Try some of the links below. The sites are true to the live original, as much as possible.
+    It's improving and becoming more effective.
+    Notice all the links are randomized to mask the origin.
+  </p>
+</div>
+<div id='body-container'></div>
 </body>
 </html>

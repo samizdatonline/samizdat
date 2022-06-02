@@ -1,62 +1,70 @@
 :root {
-    --spacer:12px;
-    --spacer2:24px;
-    --spacer3:36px;
-    --spacerhalf:6px;
-    --spacerthird:4px;
-    --spacerquarter:3px;
+  --spacer: 12px;
+  --spacer2: 24px;
+  --spacer3: 36px;
+  --spacerhalf: 6px;
+  --spacerthird: 4px;
+  --spacerquarter: 3px;
 }
+
 body {
-    margin: 0;
-    color:#27272a;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color:#ebece4;
+  margin: 0;
+  color: #27272a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #ebece4;
 }
 
 #introduction {
-    background-color: #27272a;
-    padding:var(--spacer2);
-    color:#ebece4;
+  background-color: #27272a;
+  padding: var(--spacer2);
+  color: #ebece4;
 }
+
 #introduction A {
-    color:#ebece4;
-    font-weight:bold;
+  color: #ebece4;
+  font-weight: bold;
 }
+
 #introduction A:hover {
-    font-decoration:underline;
+  font-decoration: underline;
 }
+
 #introduction H1 {
-    color:#3450f4;
-    font-size:1.6em;
-    letter-spacing: 3px;
-    font-weight: normal;
+  color: #3450f4;
+  font-size: 1.6em;
+  letter-spacing: 3px;
+  font-weight: normal;
 }
 
 #body-container {
-    margin:0;
-    padding:var(--spacer2);
+  margin: 0;
+  padding: var(--spacer2);
 }
+
 .link-tray {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
+
 .site-link {
-    border-radius:var(--spacer2);
-    margin:var(--spacer);
-    padding:var(--spacer);
-    background-color:#ffffff;
-    cursor:pointer;
-    color:#2d4fff;
-    font-size:1.2em;
+  border-radius: var(--spacer2);
+  margin: var(--spacer);
+  padding: var(--spacer);
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #2d4fff;
+  font-size: 1.2em;
 }
+
 .site-link:hover {
-    background-color:#2d4fff;
+  background-color: #2d4fff;
 }
+
 a {
-    text-decoration:none;
-    color:#0f165a;
-    font-weight:bold;
+  text-decoration: none;
+  color: #0f165a;
+  font-weight: bold;
 }
