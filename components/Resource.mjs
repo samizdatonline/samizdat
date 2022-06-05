@@ -6,62 +6,17 @@
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import Admin from './Admin.mjs';
 
 export default class Resource {
   constructor() {
     this.devMode = (process.env.PROFILE === 'DEV');
-    this.userAgent = `samizdat/1.0 (github.com/mespr/samizdat)${this.devMode ? ';development mode' : ''}`;
-    this.domains = [];
-    this.sites = [];
-    this.rules = [];
+    this.userAgent = `samizdat/1.0 (github.com/samizdatonline)${this.devMode ? ';development mode' : ''}`;
     this.signers = [
       'yr6lptp5xp6d3zv8oumcocbj9sq2n4',
       'y04skj28v0v2b5mwtjdzn6bjltcsvj',
       'p6x9056ssk3cq1z2i61n5vnmvccvdx',
     ];
-  }
-
-  /**
-   * From the server get the latest list of sites, domains and signers.
-   * This should be configured to self execute on some interval.
-   *
-   * @returns {Promise<void>}
-   */
-  async update() {
-    try {
-      // update sites and domains from server
-      const root = process.env.MASTER || 'http://localhost:' + (process.env.PORT || 3000);
-      if (this.devMode) {
-        this.domains = [
-          '9vcboht8.link:3000',
-          'dfungwjv.link:3000',
-          'q3qgoe2h.link:3000',
-        ];
-      } else {
-        this.domains = (await axios.get(`${root}/admin/domains`)).data;
-      }
-
-      this.rules = (await axios.get(`${root}/admin/rules`)).data;
-
-      const sites = (await axios.get(`${root}/admin/sites`)).data;
-      this.sites = sites.map((site) => {
-        site.id = this.tokenize(site.url, site.root, 'text/html');
-        site.server = `http://${this.randomDomain}`;
-        return site;
-      });
-    } catch (error) {
-      console.error(`update is failing: ${error.message}`);
-    }
-  }
-
-  /**
-   * Choose a random site. This is prepended to the links so routing
-   * may pass through different servers on each click
-   * @returns {string}
-   */
-  get randomDomain() {
-    let index = Math.floor(Math.random() * this.domains.length);
-    return this.domains[index];
   }
 
   /**
@@ -84,8 +39,8 @@ export default class Resource {
   }
 
   /**
-   * Given the tokenized data, try parsing it each signing key
-   * in order. Newest signer and will likely work most of the
+   * Given the tokenized data, try parsing it with each signing key
+   * in order. The newest signer will likely work most of the
    * time. New signers are added every few days and older keys
    * expired.
    *
@@ -100,7 +55,6 @@ export default class Resource {
       }
     }
     // the link cannot be located, ask the user to reload the page and try again
-    return { url: '/retry' }; // not implemented
   }
 
   /**
@@ -120,17 +74,18 @@ export default class Resource {
       { query: 'source', attrib: 'srcset' },
       { query: 'iframe', attrib: 'src' },
     ];
-    // rules can be used to modify the parsing for specific domains
-    let rules = this.rules.html.reduce((r, item) => {
-      if (new RegExp(item.match).test(target.url)) r.push(item.rule);
-      return r;
-    }, []);
+    let site = await Admin.getSite(target);
+    //TODO: we to handle the various cases for site matching to some extent.
+    if (site) site = site[0];
     // apply rules
-    for (let rule of rules) {
+    for (let rule of site?site.rules||[]:[]) {
       if (rule.name === 'SKIPTAG') {
         tags = tags.filter(item => item.query !== rule.value);
       }
     }
+    // get a set of random domains
+    let domains = await Admin.getDomain(4);
+    let domainIdx = 0;
     // get source content and rewrite it
     let response = await axios.get(target.url, { headers: { 'User-Agent': this.userAgent } });
     let $ = cheerio.load(response.data);
@@ -138,8 +93,10 @@ export default class Resource {
       let elements = $(tag.query);
       for (let element of elements) {
         if (element.attribs[tag.attrib]) {
+          let domain = domains[domainIdx++];
+          if (domainIdx >= domains.length) domainIdx = 0;
           let path = '/go/' + this.tokenize(element.attribs[tag.attrib], target.root, tag.type);
-          element.attribs[tag.attrib] = 'http://' + this.randomDomain + path;
+          element.attribs[tag.attrib] = 'http://' + domain + path;
         }
       }
     }

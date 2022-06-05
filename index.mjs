@@ -2,10 +2,8 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import morgan from 'morgan';
-import path from 'path';
 import Resource from './components/Resource.mjs';
-import IdForge from './components/IdForge.mjs';
-import adminRouter from './components/adminRouter.mjs';
+import Admin from './components/Admin.mjs';
 
 const main = async function() {
   const resource = new Resource();
@@ -30,11 +28,7 @@ const main = async function() {
   app.get('/health', (_, res) =>
     res.status(200).send());
 
-  app.get('/sites', async (_, res) =>
-    res.json(resource.sites));
-
-  app.get('/retry', (_, res) =>
-    res.send('page link cannot be found. Please reload the page and try again.'));
+  app.get('/favicon.ico',express.static('/site/assets/favicon-32x32.png'));
 
   app.get('/go/:token', async (req, res) => {
     try {
@@ -56,27 +50,22 @@ const main = async function() {
     if (!root || !root[0]) {
       res.send('<!DOCTYPE html><html><body>malformed url. please provide the full protocol, host and path</body></html>');
     } else {
+      let domain = await Admin.getDomain();
       const token = resource.tokenize(url, root[0], 'text/html');
-      const path = `${resource.randomDomain}/go/${token}`;
+      const path = `${domain}/go/${token}`;
       const html = `<!DOCTYPE html><html><body><a href='http://${path}'>http://${path}</a></a></body></html>`;
       res.send(html);
     }
   });
 
-  app.get('/id', (req, res) =>
-    res.send(IdForge.randomId(req.query.length || 8)));
-
-  app.use('/admin', adminRouter);
-  app.use('/', express.static(path.resolve('site')));
+  app.get('/',(req,res) => {
+    res.redirect('https://samizdat.online');
+  })
 
   const server = http.createServer(app);
   server.listen(process.env.PORT || 3000);
   server.on('error', console.error);
   server.on('listening', () => console.info(`Listening on port ${server.address().port}`));
-
-  // populate routing data
-  await resource.update();
-  setInterval(async () => await resource.update(), 10000);
 }();
 
 process.on('SIGINT', () => {
