@@ -12,15 +12,11 @@ export default class Resource {
   constructor() {
     this.devMode = (process.env.PROFILE === 'DEV');
     this.userAgent = `samizdat/1.0 (github.com/samizdatonline)${this.devMode ? ';development mode' : ''}`;
-    this.signers = [
-      'yr6lptp5xp6d3zv8oumcocbj9sq2n4',
-      'y04skj28v0v2b5mwtjdzn6bjltcsvj',
-      'p6x9056ssk3cq1z2i61n5vnmvccvdx',
-    ];
   }
   static async mint() {
     let resource = new Resource();
     resource.signers = await Admin.getSigners();
+    if (!resource.signers || resource.signers.length === 0) throw new Error('no signers');
     return resource;
   }
   /**

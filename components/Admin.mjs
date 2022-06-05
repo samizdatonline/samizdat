@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export default class Admin {
   static get root() {
-    return 'http://localhost:3333'
     return 'https://admin.samizdat.online';
   }
   static get headers() {
