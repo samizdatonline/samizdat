@@ -18,7 +18,11 @@ export default class Resource {
       'p6x9056ssk3cq1z2i61n5vnmvccvdx',
     ];
   }
-
+  static async mint() {
+    let resource = new Resource();
+    resource.signers = await Admin.getSigners();
+    return resource;
+  }
   /**
    * Uses a JWT to encode the url into a signed string.
    *

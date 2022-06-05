@@ -6,7 +6,7 @@ import Resource from './components/Resource.mjs';
 import Admin from './components/Admin.mjs';
 
 const main = async function() {
-  const resource = new Resource();
+  const resource = await Resource.mint();
   const app = express();
 
   // attach logger
