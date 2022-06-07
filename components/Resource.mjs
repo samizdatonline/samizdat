@@ -13,12 +13,14 @@ export default class Resource {
     this.devMode = (process.env.PROFILE === 'DEV');
     this.userAgent = `samizdat/1.0 (github.com/samizdatonline)${this.devMode ? ';development mode' : ''}`;
   }
+
   static async mint() {
     let resource = new Resource();
     resource.signers = await Admin.getSigners();
     if (!resource.signers || resource.signers.length === 0) throw new Error('no signers');
     return resource;
   }
+
   /**
    * Uses a JWT to encode the url into a signed string.
    *
@@ -78,7 +80,7 @@ export default class Resource {
     //TODO: we to handle the various cases for site matching to some extent.
     if (site) site = site[0];
     // apply rules
-    for (let rule of site?site.rules||[]:[]) {
+    for (let rule of site ? site.rules || [] : []) {
       if (rule.name === 'SKIPTAG') {
         tags = tags.filter(item => item.query !== rule.value);
       }
@@ -106,11 +108,15 @@ export default class Resource {
   async deliverOther(target, res) {
     const config = {
       'User-Agent': this.userAgent,
+      'Origin': target.root,
       'responseType': 'stream',
     };
-    const response = await axios.get(target.url, config);
-    res.set('Content-Type', response.headers['content-type']);
+    if (/^\/\//.test(target.url)) {
+      target.url = target.url.replace(/^\/\//, 'http://');
+    }
     try {
+      const response = await axios.get(target.url, config);
+      res.set('Content-Type', response.headers['content-type']);
       response.data.pipe(res);
     } catch (error) {
       res.set('Content-Type', 'text/html');
