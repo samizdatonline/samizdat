@@ -59,7 +59,7 @@ const main = async function() {
   });
 
   app.get('/',(req,res) => {
-    res.redirect('https://samizdat.online');
+    res.redirect('https://samizdatonline.org');
   })
 
   const server = http.createServer(app);
