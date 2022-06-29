@@ -1,9 +1,15 @@
+import { MongoClient } from 'mongodb';
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
 import morgan from 'morgan';
 import Resource from './components/Resource.mjs';
 import Admin from './components/Admin.mjs';
+
+const client = new MongoClient('mongodb://username:password@mongo:27017');
+await client.connect();
+const database = client.db('statistics');
+const collection = database.collection('entries');
 
 const main = async function() {
   const resource = await Resource.mint();
@@ -28,10 +34,12 @@ const main = async function() {
   app.get('/health', (_, res) =>
     res.status(200).send());
 
-  app.get('/favicon.ico',express.static('/site/assets/favicon-32x32.png'));
+  app.get('/favicon.ico', express.static('/site/assets/favicon-32x32.png'));
 
   app.get('/go/:token', async (req, res) => {
     try {
+      const stat = { datetime: new Date().toISOString(), ip: req.ip, token: req.params.token };
+      await collection.insertOne(stat);
       const target = await resource.parse(req.params.token);
       if (target.type === 'text/html') {
         await resource.deliverHtml(target, res);
@@ -58,9 +66,9 @@ const main = async function() {
     }
   });
 
-  app.get('/',(req,res) => {
+  app.get('/', (req, res) => {
     res.redirect('https://samizdatonline.org');
-  })
+  });
 
   const server = http.createServer(app);
   server.listen(process.env.PORT || 3000);
