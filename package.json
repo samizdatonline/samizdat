@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "post-feed-reader": "^1.2.0",
     "puppeteer": "^14.1.2",
-    "mongodb": "^4.5.0"
+    "mongodb": "^4.5.0",
+    "iconv": "^3.0.1"
   }
 }

@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import Admin from './Admin.mjs';
+import iconv from 'iconv';
 
 export default class Resource {
   constructor() {
@@ -63,7 +64,7 @@ export default class Resource {
    * Pull the given url from the root host and replace all
    * embedded links with a local path including the
    * @param target
-   * @param res
+   * @param {e.Response} res
    * @returns {Promise<string>}
    */
   async deliverHtml(target, res) {
@@ -89,7 +90,18 @@ export default class Resource {
     let domains = await Admin.getDomain(4);
     let domainIdx = 0;
     // get source content and rewrite it
-    let response = await axios.get(target.url, { headers: { 'User-Agent': this.userAgent } });
+    let response = await axios.get(target.url, {
+      headers: { 'User-Agent': this.userAgent },
+      responseType: 'arraybuffer',
+      reponseEncoding: 'binary',
+    });
+
+    const codepage = Object.entries(response.headers)
+      .find(([key]) => key === 'content-type')[1]
+      .split('=')[1];
+    let conv = new iconv.Iconv(codepage, 'utf8');
+    response.data = conv.convert(response.data).toString();
+
     let $ = cheerio.load(response.data);
     for (let tag of tags) {
       let elements = $(tag.query);
@@ -102,6 +114,8 @@ export default class Resource {
         }
       }
     }
+    Object.entries(response.headers).forEach(([key, value]) => res.setHeader(key, value));
+    res.setHeader('content-type', 'text/html; charset=utf-8')
     res.send($.root().html());
   }
 
