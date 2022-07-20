@@ -33,4 +33,12 @@ export default class Admin {
       return null;
     }
   }
+  static async ping(data) {
+    try {
+      let result = await axios.put(`${Admin.root}/ping/silent/samizdat`,data,Admin.headers);
+      return result.data;
+    } catch(e) {
+      return null;
+    }
+  }
 }
