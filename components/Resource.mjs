@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import Admin from './Admin.mjs';
-import iconv from 'iconv';
+import iconv from 'iconv-lite';
 
 export default class Resource {
   constructor() {
@@ -96,11 +96,10 @@ export default class Resource {
       reponseEncoding: 'binary',
     });
 
-    const codepage = Object.entries(response.headers)
+    const encoding = Object.entries(response.headers)
       .find(([key]) => key === 'content-type')[1]
       .split('=')[1];
-    let conv = new iconv.Iconv(codepage, 'utf8');
-    response.data = conv.convert(response.data).toString();
+    response.data = iconv.decode(response.data,encoding);
 
     let $ = cheerio.load(response.data);
     for (let tag of tags) {

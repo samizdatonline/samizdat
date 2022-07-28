@@ -37,10 +37,6 @@ The domains change. That is the point. The more domains assigned to the project
 the stronger the project becomes. Try also http://help.me.rhonda.help/ or http://6tmk927m.link/
 When html is requested, every link, anchor, img and script is swapped with a masked url.
 
-Please run a server and register more domains. /data/domains.json identifies
-all the domains available to use. This is served from /components/Admin.js
-which is indended to manage this list.
-
 >NOTE: the mask feature may need to be suppressed or require authentication to avoid
 > abuse of this system.
 
