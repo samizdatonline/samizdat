@@ -13,12 +13,11 @@ export default class Admin {
     if (!apikey && process.env.SNAP_DATA) {
       apikey = fs.readFileSync(`${process.env.SNAP_DATA}/apikey`);
       if (!apikey) throw new Error('Try sudo snap set samizdat apikey=[key] and restart');
-      apikey = apikey.replace(/\n/,"");
+      else apikey = apikey.toString().replace(/\n/,""); // sometimes 'snap set' allows errant newlines
     }
     if (!apikey) {
       throw new Error('APIKEY=[apikey] needs to be defined in .env')
     }
-    console.log("the apikey="+apikey);
     return {headers:{authorization:"bearer "+apikey}};
   }
   static async getDomain(count=1) {
