@@ -2,22 +2,25 @@
   "name": "samizdat",
   "version": "1.0.1",
   "description": "This project is intended to break through the DNS barriers commonly used to censor information in countries that prefer propaganda over true reporting. It provides a relay to respected global news outlets, masking the dns and ip behind a large randomized pool of addresses.",
-  "main": "index.mjs",
+  "main": "samizdat.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r dotenv/config index.mjs"
+    "start": "node -r dotenv/config samizdat.mjs"
+  },
+  "bin": {
+    "samizdat": "samizdat.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mespr/samizdat.git"
+    "url": "git+https://github.com/samizdatonline/samizdat.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mespr/samizdat/issues"
+    "url": "https://github.com/samizdatonline/samizdat/issues"
   },
-  "homepage": "https://github.com/mespr/samizdat#readme",
+  "homepage": "https://github.com/samizdatonline/samizdat#readme",
   "dependencies": {
     "axios": "^0.26.1",
     "cheerio": "^1.0.0-rc.10",
@@ -28,7 +31,6 @@
     "html-pdf-node": "^1.0.7",
     "iconv-lite": "^0.6.3",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^4.5.0",
     "morgan": "^1.10.0",
     "post-feed-reader": "^1.2.0",
     "puppeteer": "^15.4.0"

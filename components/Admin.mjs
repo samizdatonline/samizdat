@@ -1,11 +1,25 @@
 import axios from 'axios';
+import fs from 'fs';
+import dotenv from 'dotenv'
+dotenv.config();
+let apikey = null;
 
 export default class Admin {
   static get root() {
     return 'https://admin.samizdat.online';
   }
   static get headers() {
-    return {headers:{authorization:"bearer "+process.env.APIKEY}};
+    if (!apikey) apikey = process.env.APIKEY;
+    if (!apikey && process.env.SNAP_DATA) {
+      apikey = fs.readFileSync(`${process.env.SNAP_DATA}/apikey`);
+      if (!apikey) throw new Error('Try sudo snap set samizdat apikey=[key] and restart');
+      apikey = apikey.replace(/\n/,"");
+    }
+    if (!apikey) {
+      throw new Error('APIKEY=[apikey] needs to be defined in .env')
+    }
+    console.log("the apikey="+apikey);
+    return {headers:{authorization:"bearer "+apikey}};
   }
   static async getDomain(count=1) {
     try {
@@ -30,6 +44,8 @@ export default class Admin {
       let result = await axios.get(`${Admin.root}/resource/signers`,Admin.headers);
       return result.data;
     } catch(e) {
+      console.log(Admin.headers);
+      console.log(e);
       return null;
     }
   }

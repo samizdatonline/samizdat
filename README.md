@@ -31,13 +31,13 @@ Internet and hide free press. The world wants both integrity and access.
 
 ## Usage
 
-Try http://raul.help. Russia, Are You Listening. Try http://rhonda.help/mask/https://www.theguardian.com.
+See https://samizdatonline.org/. Follow some of the links to see it in action.
 
 The domains change. That is the point. The more domains assigned to the project
-the stronger the project becomes. Try also http://help.me.rhonda.help/ or http://6tmk927m.link/
-When html is requested, every link, anchor, img and script is swapped with a masked url.
+the stronger the project becomes. When html is requested, every link, anchor,
+img and script is swapped with a masked url.
 
->NOTE: the mask feature may need to be suppressed or require authentication to avoid
+>NOTE: the mask/share feature may need to be suppressed or require authentication to avoid
 > abuse of this system.
 
 ## System Architecture
@@ -60,13 +60,13 @@ to be enabled as a root server that others can regularly pull from. This
 should probably be moved to a separate package as it grows.
 
 #### Environment Variables
-All optional
 
-| Name    | Default                 | Description                                                    |
-|---------|-------------------------|----------------------------------------------------------------|
-| MASTER  | http://localhost:{PORT} | Path to the administration server                              |
-| PORT    | 3000                    | Port to listen on                                              |
-| PROFILE |                         | If set to DEV, instructs the system to run in development mode |
+| Name    | Default                       | Description                                                    |
+|---------|-------------------------------|----------------------------------------------------------------|
+| MASTER  | https://admin.samizdat.online | Path to the administration server                              |
+| PORT    | 3000                          | Port to listen on                                              |
+| PROFILE |                               | If set to DEV, instructs the system to run in development mode |
+| APIKEY | | Secret key assigned by admin /session/apikey, for accessing server data |
 
 #### Development Mode
 In development mode, the active domains are hardcoded rather fetched from the
@@ -127,4 +127,12 @@ This is the pertinent config history for setting up a vanilla ubuntu AWS instanc
    33  sudo systemctl enable nginx
    34  sudo systemctl start samizdat
    35  sudo systemctl status samizdat
+```
+### In Progress Update
+We are moving to a snap distribution for ease of install and maintenance.
+
+Once the samizdat snap is installed, configure the API key with
+```ssh
+sudo snap set samizdat apikey=[apikey]
+sudo snap restart samizdat
 ```

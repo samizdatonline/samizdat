@@ -1,0 +1,20 @@
+name: samizdat
+base: core20
+version: git
+summary: Web site relay server
+description: |
+  Samizdat is a site relay service that scrambles DNS across a broad network of independent servers.
+  It is intended to answer the abuse of DNS blacklisting used by some countries to block the free
+  flow of information.
+grade: stable
+confinement: strict
+apps:
+  samizdat:
+    command: bin/samizdat
+    daemon: simple
+
+parts:
+  samizdat:
+    plugin: npm
+    npm-node-version: 16.15.1
+    source: .

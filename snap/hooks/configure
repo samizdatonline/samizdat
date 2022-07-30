@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if ! apikey=$(snapctl get apikey); then
+    echo "Please provide an apikey with sudo snap set samizdat apikey=[apikey]"
+    exit 1
+fi
+
+echo "$apikey" > $SNAP_DATA/apikey
+chmod 600 $SNAP_DATA/apikey
