@@ -8,6 +8,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import Admin from './Admin.mjs';
 import iconv from 'iconv-lite';
+import PuppeteerPage from './PuppeteerPage.mjs';
 
 export default class Resource {
   constructor() {
@@ -99,9 +100,17 @@ export default class Resource {
     const encoding = Object.entries(response.headers)
       .find(([key]) => key === 'content-type')[1]
       .split('=')[1];
-    response.data = iconv.decode(response.data,encoding);
+    response.data = iconv.decode(response.data,encoding||"UTF-8");
 
-    let $ = cheerio.load(response.data);
+    let pp = await PuppeteerPage.mint(target.url);
+    let data = await pp.getHtml();
+    let $ = cheerio.load(data);
+    // let $ = cheerio.load(response.data);
+    // this might be useful to remove the url sandbox
+    // if (true /* rule===DROPMANIFEST perhaps */) {
+    //   $("link[rel='manifest']").remove();
+    // }
+
     for (let tag of tags) {
       let elements = $(tag.query);
       for (let element of elements) {
@@ -112,8 +121,11 @@ export default class Resource {
           element.attribs[tag.attrib] = 'http://' + domain + path;
         }
       }
-    }
-    Object.entries(response.headers).forEach(([key, value]) => res.setHeader(key, value));
+    }//content-security-policy-report-only
+    Object.entries(response.headers).forEach(([key, value]) => {
+      if (key.match(/policy/)) return;
+      res.setHeader(key, value)
+    });
     res.setHeader('content-type', 'text/html; charset=utf-8')
     res.send($.root().html());
   }

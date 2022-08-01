@@ -1,4 +1,4 @@
-name: samizdat
+name: samizdat-server
 base: core20
 version: git
 summary: Web site relay server
