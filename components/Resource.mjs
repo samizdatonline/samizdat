@@ -75,7 +75,8 @@ export default class Resource {
       { query: 'img', attrib: 'src' },
       { query: 'source', attrib: 'src' },
       { query: 'source', attrib: 'srcset' },
-      { query: 'iframe', attrib: 'src' },
+      { query: 'iframe[title!="YouTube video player"]', attrib: 'src' },
+      { query: '[style^="background-image: url(/upload/resize_cache/iblock/"]', attrib: 'style', prefix: 'background-image: url(', postfix: ')'}
     ];
     let site = await Admin.getSite(target);
     //TODO: we to handle the various cases for site matching to some extent.
@@ -108,8 +109,24 @@ export default class Resource {
         if (element.attribs[tag.attrib]) {
           let domain = domains[domainIdx++];
           if (domainIdx >= domains.length) domainIdx = 0;
-          let path = '/go/' + this.tokenize(element.attribs[tag.attrib], target.root, tag.type);
-          element.attribs[tag.attrib] = 'http://' + domain + path;
+
+          let url = element.attribs[tag.attrib];
+          if (tag.prefix) {
+            url = url.replace(tag.prefix, '')
+          }
+          if (tag.postfix) {
+            url = url.replace(tag.postfix, '')
+          }
+          let path = '/go/' + this.tokenize(url, target.root, tag.type);
+          path = `http://${domain}${path}`;
+          if (tag.prefix) {
+            path = tag.prefix + path;
+          }
+          if (tag.postfix) {
+            path = path + tag.postfix;
+          }
+
+          element.attribs[tag.attrib] = path;
         }
       }
     }
